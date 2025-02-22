@@ -16,3 +16,13 @@ exports.updateBranch = async (req, res) => {
   const branch = await Branch.findByIdAndUpdate(id, req.body, { new: true });
   res.json(branch);
 };
+
+exports.deleteBranch = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedBranch = await Branch.findByIdAndDelete(id);
+    res.send("Deleted");
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+};
